@@ -1,6 +1,6 @@
 {
   "name": "gollumts-service",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An implementaion of service injector and manager.",
   "main": "index.js",
   "scripts": {
