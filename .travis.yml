@@ -5,7 +5,7 @@ before_install:
   - npm i -g makeshift && makeshift -s @bcoe -r https://registry.npmjs.org
 deploy:
   provider: npm
-  email: $LOGN_PUBLISH
-  api_key: $TOKEN_PUBLISH
+  email: $LOGIN_PUBLISH
+  api_key: $NPM_API_KEY
   on:
     tags: true
