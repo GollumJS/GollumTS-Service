@@ -1,3 +1,6 @@
+sudo: required
+dist: trusty
+language: node_js
 deploy:
     tags: true
     provider: npm
