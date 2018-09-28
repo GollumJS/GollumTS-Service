@@ -12,7 +12,7 @@ npm install --save gollumts-service
 
 ```typescript
 	
-	import { Service, App } from * 'gollumts-service';
+	import { Service, App } from 'gollumts-service';
 	
 	class Service1 {
 		
