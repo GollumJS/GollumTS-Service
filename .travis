@@ -1,6 +1,0 @@
-deploy:
-  tags: true
-  provider: npm
-  email: $LOGN_PUBLISH
-  api_key: $TOKEN_PUBLISH
-  
