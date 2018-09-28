@@ -1,12 +1,11 @@
-sudo: false
-dist: trusty
 language: node_js
-
-jobs:
-  include:
-    - stage: npm release
-      deploy:
-        tags: true
-        provider: npm
-        email: $LOGN_PUBLISH
-        api_key: $TOKEN_PUBLISH
+node_js:
+  - "node"
+before_install:
+  - npm i -g makeshift && makeshift -s @bcoe -r https://registry.npmjs.org
+deploy:
+  provider: npm
+  email: $LOGN_PUBLISH
+  api_key: $TOKEN_PUBLISH
+  on:
+    tags: true
