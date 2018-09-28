@@ -1,8 +1,12 @@
-sudo: required
+sudo: false
 dist: trusty
 language: node_js
-deploy:
-    tags: true
-    provider: npm
-    email: $LOGN_PUBLISH
-    api_key: $TOKEN_PUBLISH
+
+jobs:
+  include:
+    - stage: npm release
+      deploy:
+        tags: true
+        provider: npm
+        email: $LOGN_PUBLISH
+        api_key: $TOKEN_PUBLISH
