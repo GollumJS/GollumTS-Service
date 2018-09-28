@@ -1,0 +1,49 @@
+{
+  "name": "gollumts-service",
+  "version": "1.0.0",
+  "description": "An implementaion of service injector and manager.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GollumJS/GollumTS-Service.git"
+  },
+  "keywords": [
+    "service",
+    "injector",
+    "decorator",
+    "typescript"
+  ],
+  "author": "Damien Duboeuf <smeagolworms4@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GollumJS/GollumTS-Service/issues"
+  },
+  "homepage": "https://github.com/GollumJS/GollumTS-Service#readme",
+  "dependencies": {
+    "gollumts-objecttype": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^2.9.2"
+  },
+  "files": [
+    "index.ts",
+    "index.js",
+    "index.js.map",
+    "src/App.ts",
+    "src/App.js",
+    "src/App.js.map",
+    "src/Decorator/Service.ts",
+    "src/Decorator/Service.js",
+    "src/Decorator/Service.js.map",
+    "LICENSE",
+    "README.md",
+    "package.json",
+    "package-lock.json",
+    "README.md",
+    "tsconfig.json",
+    ".gitignore"
+  ]
+}
