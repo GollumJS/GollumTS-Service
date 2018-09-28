@@ -16,7 +16,7 @@ npm install --save gollumts-service
 	
 	class Service1 {
 		
-		@Service
+		@Service()
 		private _nameOfService2: Service2;
 		
 		display(): void {
@@ -52,7 +52,7 @@ npm install --save gollumts-service
 	
 	class Main extends App {
 		
-		@Service
+		@Service()
 		private _nameOfService1: Service1;
 		
 		start(): void {
