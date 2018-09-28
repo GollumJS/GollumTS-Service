@@ -6,6 +6,6 @@ before_install:
 deploy:
   provider: npm
   email: $LOGIN_PUBLISH
-  api_key: $NPM_API_KEY
+  api_key: $NPM_TOKEN
   on:
     tags: true
