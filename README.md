@@ -36,7 +36,7 @@ npm install --save gollumts-service
 		
 	}
 	
-	class Service2 {
+	class Service3 {
 		
 		private _text: string;
 		
