@@ -60,6 +60,7 @@ npm install --save gollumts-service
 			this.declare('nameOfService1', Service1);
 			this.declare('nameOfService2', Service2);
 			this.set('nameOfService3', new Service3('Hello World'));
+			this.declare('nameOfService3WithParams', Service3, ['Hello World']);
 			
 			this._nameOfService1.display();
 			

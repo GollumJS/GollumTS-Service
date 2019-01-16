@@ -2,6 +2,7 @@ import {ObjectString} from 'gollumts-objecttype';
 
 interface ContainerValue {
 	clazz: any;
+	args?: any[];
 	instance: any;
 }
 
@@ -37,23 +38,25 @@ export abstract class App {
 		return !!this._container[name];
 	}
 	
-	public declare(name: string, clazz: any): void {
+	public declare(name: string, clazz: any, args: any[] = []): void {
 		name = name.toLowerCase();
 		this._container[name] = {
 			clazz: clazz,
 			instance: null,
+			args: args,
 		}
 	}
 	
 	public get<T>(name): T {
 		name = name.toLowerCase();
-		if (!this._container[name]) {
+		const target = this._container[name];
+		if (!target) {
 			throw new Error('Service not found: \''+this._containerName+':'+name+'\'');
 		}
-		if (!this._container[name].instance) {
-			this._container[name].instance = new (this._container[name].clazz)();
+		if (!target.instance) {
+			target.instance = new (target.clazz)(...target.args);
 		}
-		return this._container[name].instance;
+		return target.instance;
 	}
 	
 	
