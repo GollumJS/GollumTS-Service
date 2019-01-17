@@ -1,8 +1,13 @@
 import {ObjectString} from 'gollumts-objecttype';
 
+export interface ServiceOptions {
+	args?: any[];
+	tags?: string[];
+}
+
 interface ContainerValue {
 	clazz: any;
-	args?: any[];
+	options?: ServiceOptions;
 	instance: any;
 }
 
@@ -16,8 +21,9 @@ export abstract class App {
 		return this._instances[name];
 	}
 	
-	private _container: { [name: string]: ContainerValue } = {};
 	private _containerName: string;
+	private _container: ObjectString<ContainerValue> = {};
+	private _taggedServices: ObjectString<any[]> = {};
 	
 	public constructor (name: string = App.DEFAULT_CONTAINER_NAME) {
 		this._containerName = name;
@@ -25,12 +31,13 @@ export abstract class App {
 		this.set('app', this);
 	}
 	
-	public set(name: string, value: any): void {
+	public set(name: string, value: any, options: ServiceOptions = {}): void {
 		name = name.toLowerCase();
 		this._container[name] = {
 			clazz: value.constructor,
 			instance: value,
 		}
+		this.resetTaggedCache(options);
 	}
 	
 	public has(name: string): boolean {
@@ -38,12 +45,21 @@ export abstract class App {
 		return !!this._container[name];
 	}
 	
-	public declare(name: string, clazz: any, args: any[] = []): void {
+	public declare(name: string, clazz: any, options: ServiceOptions = {}): void {
 		name = name.toLowerCase();
 		this._container[name] = {
 			clazz: clazz,
 			instance: null,
-			args: args,
+			options: options,
+		}
+		this.resetTaggedCache(options);
+	}
+	
+	private resetTaggedCache(options: ServiceOptions): void {
+		if (options && options.tags) {
+			options.tags.forEach(tagName => {
+				if (this._taggedServices[tagName]) delete this._taggedServices[tagName];
+			});
 		}
 	}
 	
@@ -54,9 +70,23 @@ export abstract class App {
 			throw new Error('Service not found: \''+this._containerName+':'+name+'\'');
 		}
 		if (!target.instance) {
-			target.instance = new (target.clazz)(...target.args);
+			const args: any[] = target.options && target.options.args ? target.options.args : [];
+			target.instance = new (target.clazz)(...args);
 		}
 		return target.instance;
+	}
+	
+	public getsByTag<T>(tagName: string): T[] {
+		if (!this._taggedServices[tagName]) {
+			this._taggedServices[tagName] = Object.keys(this._container)
+				.filter(name => {
+					const service: ContainerValue = this._container[name];
+					return service.options && service.options.tags.indexOf(tagName) !== -1;
+				})
+				.map(name => this.get<T>(name))
+			;
+		}
+		return this._taggedServices[tagName];
 	}
 	
 	

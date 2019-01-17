@@ -12,7 +12,7 @@ npm install --save gollumts-service
 
 ```typescript
 	
-	import { Service, App } from 'gollumts-service';
+	import { App, Service, Tags } from 'gollumts-service';
 	
 	class Service1 {
 		
@@ -55,14 +55,22 @@ npm install --save gollumts-service
 		@Service()
 		private _nameOfService1: Service1;
 		
+		@Tags()
+		private _tags1: any[];
+		
 		start(): void {
 			
 			this.declare('nameOfService1', Service1);
 			this.declare('nameOfService2', Service2);
 			this.set('nameOfService3', new Service3('Hello World'));
-			this.declare('nameOfService3WithParams', Service3, ['Hello World']);
+			this.declare('nameOfService3WithParams', Service3, { args: ['Hello World'] });
+			
+			this.declare('taggedService1', Service1, { tags: [ 'tags1' ] });
+			this.declare('taggedService2', Service2, { tags: [ 'tags1', 'tag2' ] });
 			
 			this._nameOfService1.display();
+			
+			this._tags1[0].display();
 			
 		}
 		
