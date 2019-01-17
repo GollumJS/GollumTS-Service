@@ -68,7 +68,7 @@ var App = (function () {
             this._taggedServices[tagName] = Object.keys(this._container)
                 .filter(function (name) {
                 var service = _this._container[name];
-                return service.options && service.options.tags.indexOf(tagName) !== -1;
+                return service.options && service.options.tags && service.options.tags.indexOf(tagName) !== -1;
             })
                 .map(function (name) { return _this.get(name); });
         }

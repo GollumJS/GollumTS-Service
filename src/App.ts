@@ -85,7 +85,7 @@ export abstract class App {
 			this._taggedServices[tagName] = Object.keys(this._container)
 				.filter(name => {
 					const service: ContainerValue = this._container[name];
-					return service.options && service.options.tags.indexOf(tagName) !== -1;
+					return service.options && service.options.tags && service.options.tags.indexOf(tagName) !== -1;
 				})
 				.map(name => this.get<T>(name))
 			;
