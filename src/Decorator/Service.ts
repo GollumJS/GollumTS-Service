@@ -1,6 +1,6 @@
 import {App} from '../App';
 
-export function Service(containerName: string = App.DEFAULT_CONTAINER_NAME, name: string = null) {
+export function Service(name: string = null, containerName: string = App.DEFAULT_CONTAINER_NAME) {
 	
 	return function(target: any, propertyKey: string = null, descriptor: PropertyDescriptor = null) {
 		
