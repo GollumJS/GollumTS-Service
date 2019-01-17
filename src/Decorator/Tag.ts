@@ -1,6 +1,6 @@
 import {App} from '../App';
 
-export function Tags(tagName: string = null, containerName: string = App.DEFAULT_CONTAINER_NAME) {
+export function Tag(tagName: string = null, containerName: string = App.DEFAULT_CONTAINER_NAME) {
 	
 	return function(target: any, propertyKey: string = null, descriptor: PropertyDescriptor = null) {
 		

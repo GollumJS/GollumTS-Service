@@ -18,7 +18,11 @@ export abstract class App {
 	private static _instances: ObjectString<App> = {};
 	
 	public static getInstance(name: string = App.DEFAULT_CONTAINER_NAME): App {
-		return this._instances[name];
+		const container = this._instances[name];
+		if (!container) {
+			throw new Error('Container '+name+' not found.');
+		}
+		return container;
 	}
 	
 	private _containerName: string;

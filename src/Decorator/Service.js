@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var App_1 = require("../App");
-function Service(containerName, name) {
-    if (containerName === void 0) { containerName = App_1.App.DEFAULT_CONTAINER_NAME; }
+function Service(name, containerName) {
     if (name === void 0) { name = null; }
+    if (containerName === void 0) { containerName = App_1.App.DEFAULT_CONTAINER_NAME; }
     return function (target, propertyKey, descriptor) {
         if (propertyKey === void 0) { propertyKey = null; }
         if (descriptor === void 0) { descriptor = null; }

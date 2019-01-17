@@ -11,7 +11,11 @@ var App = (function () {
     }
     App.getInstance = function (name) {
         if (name === void 0) { name = App.DEFAULT_CONTAINER_NAME; }
-        return this._instances[name];
+        var container = this._instances[name];
+        if (!container) {
+            throw new Error('Container ' + name + ' not found.');
+        }
+        return container;
     };
     App.prototype.set = function (name, value, options) {
         if (options === void 0) { options = {}; }

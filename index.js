@@ -5,5 +5,5 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./src/App"));
 __export(require("./src/Decorator/Service"));
-__export(require("./src/Decorator/Tags"));
+__export(require("./src/Decorator/Tag"));
 //# sourceMappingURL=index.js.map

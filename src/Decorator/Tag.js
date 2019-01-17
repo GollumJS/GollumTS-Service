@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var App_1 = require("../App");
-function Tags(containerName, tagName) {
-    if (containerName === void 0) { containerName = App_1.App.DEFAULT_CONTAINER_NAME; }
+function Tag(tagName, containerName) {
     if (tagName === void 0) { tagName = null; }
+    if (containerName === void 0) { containerName = App_1.App.DEFAULT_CONTAINER_NAME; }
     return function (target, propertyKey, descriptor) {
         if (propertyKey === void 0) { propertyKey = null; }
         if (descriptor === void 0) { descriptor = null; }
@@ -16,5 +16,5 @@ function Tags(containerName, tagName) {
         });
     };
 }
-exports.Tags = Tags;
-//# sourceMappingURL=Tags.js.map
+exports.Tag = Tag;
+//# sourceMappingURL=Tag.js.map

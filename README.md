@@ -55,8 +55,11 @@ npm install --save gollumts-service
 		@Service()
 		private _nameOfService1: Service1;
 		
-		@Tags()
+		@Tag()
 		private _tags1: any[];
+		
+		@Tag('tag2')
+		private _tags2CustomName: any[];
 		
 		start(): void {
 			
