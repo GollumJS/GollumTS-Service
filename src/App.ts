@@ -7,7 +7,7 @@ export interface ServiceOptions {
 
 interface ContainerValue {
 	clazz: any;
-	options?: ServiceOptions;
+	options: ServiceOptions;
 	instance: any;
 }
 
@@ -37,11 +37,13 @@ export abstract class App {
 	
 	public set(name: string, value: any, options: ServiceOptions = {}): void {
 		name = name.toLowerCase();
-		this._container[name] = {
+		const service = {
 			clazz: value.constructor,
 			instance: value,
+			options: options
 		}
-		this.resetTaggedCache(options);
+		this.resetTaggedCache(service);
+		this._container[name] = service;
 	}
 	
 	public has(name: string): boolean {
@@ -51,17 +53,23 @@ export abstract class App {
 	
 	public declare(name: string, clazz: any, options: ServiceOptions = {}): void {
 		name = name.toLowerCase();
-		this._container[name] = {
+		const service = {
 			clazz: clazz,
 			instance: null,
 			options: options,
 		}
-		this.resetTaggedCache(options);
+		this.resetTaggedCache(service);
+		this._container[name] = service;
 	}
 	
-	private resetTaggedCache(options: ServiceOptions): void {
-		if (options && options.tags) {
-			options.tags.forEach(tagName => {
+	private resetTaggedCache(service: ContainerValue): void {
+		service.options.tags = service.options.tags ? service.options.tags : [];
+		if (service.clazz && service.clazz.__gollumts_service_tagged__) {
+			service.options.tags = service.options.tags.concat(service.clazz.__gollumts_service_tagged__);
+		}
+		service.options.tags = service.options.tags.filter((value, index, self) => self.indexOf(value) === index);
+		if (service.options.tags) {
+			service.options.tags.forEach(tagName => {
 				if (this._taggedServices[tagName]) delete this._taggedServices[tagName];
 			});
 		}

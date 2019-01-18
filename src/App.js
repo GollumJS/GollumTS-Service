@@ -20,11 +20,13 @@ var App = (function () {
     App.prototype.set = function (name, value, options) {
         if (options === void 0) { options = {}; }
         name = name.toLowerCase();
-        this._container[name] = {
+        var service = {
             clazz: value.constructor,
             instance: value,
+            options: options
         };
-        this.resetTaggedCache(options);
+        this.resetTaggedCache(service);
+        this._container[name] = service;
     };
     App.prototype.has = function (name) {
         name = name.toLowerCase();
@@ -33,17 +35,23 @@ var App = (function () {
     App.prototype.declare = function (name, clazz, options) {
         if (options === void 0) { options = {}; }
         name = name.toLowerCase();
-        this._container[name] = {
+        var service = {
             clazz: clazz,
             instance: null,
             options: options,
         };
-        this.resetTaggedCache(options);
+        this.resetTaggedCache(service);
+        this._container[name] = service;
     };
-    App.prototype.resetTaggedCache = function (options) {
+    App.prototype.resetTaggedCache = function (service) {
         var _this = this;
-        if (options && options.tags) {
-            options.tags.forEach(function (tagName) {
+        service.options.tags = service.options.tags ? service.options.tags : [];
+        if (service.clazz && service.clazz.__gollumts_service_tagged__) {
+            service.options.tags = service.options.tags.concat(service.clazz.__gollumts_service_tagged__);
+        }
+        service.options.tags = service.options.tags.filter(function (value, index, self) { return self.indexOf(value) === index; });
+        if (service.options.tags) {
+            service.options.tags.forEach(function (tagName) {
                 if (_this._taggedServices[tagName])
                     delete _this._taggedServices[tagName];
             });

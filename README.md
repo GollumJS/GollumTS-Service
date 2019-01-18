@@ -12,7 +12,7 @@ npm install --save gollumts-service
 
 ```typescript
 	
-	import { App, Service, Tags } from 'gollumts-service';
+	import { App, Service, Tags, Tagged } from 'gollumts-service';
 	
 	class Service1 {
 		
@@ -36,6 +36,7 @@ npm install --save gollumts-service
 		
 	}
 	
+	@Tagged('autoTag') // 'Add automaticly a tag on this class'
 	class Service3 {
 		
 		private _text: string;
@@ -60,6 +61,9 @@ npm install --save gollumts-service
 		
 		@Tag('tag2')
 		private _tags2CustomName: any[];
+		
+		@Tag()
+		private _autoTag: any[];
 		
 		start(): void {
 			
