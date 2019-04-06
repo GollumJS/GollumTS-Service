@@ -67,6 +67,7 @@ var App = (function () {
         if (!target.instance) {
             var args = target.options && target.options.args ? target.options.args : [];
             target.instance = new ((_a = (target.clazz)).bind.apply(_a, [void 0].concat(args)))();
+            target[App.SERVICE_NAME_PROPERTY] = name;
         }
         return target.instance;
     };
@@ -83,6 +84,7 @@ var App = (function () {
         return this._taggedServices[tagName];
     };
     App.DEFAULT_CONTAINER_NAME = 'default';
+    App.SERVICE_NAME_PROPERTY = '__gts_sarvicename__';
     App._instances = {};
     return App;
 }());

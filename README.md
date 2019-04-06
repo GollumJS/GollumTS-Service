@@ -12,9 +12,12 @@ npm install --save gollumts-service
 
 ```typescript
 	
-	import { App, Service, Tags, Tagged } from 'gollumts-service';
+	import { App, Service, ServiceName, Tags, Tagged } from 'gollumts-service';
 	
 	class Service1 {
+		
+		@ServiceName();
+		public serviceName: string;
 		
 		@Service()
 		private _nameOfService2: Service2;
@@ -77,7 +80,9 @@ npm install --save gollumts-service
 			
 			this._nameOfService1.display();
 			
-			this._tags1[0].display();
+			this._tags1[0].display(); // Hello World
+			
+			console.log(this._nameOfService1.serviceName); // nameofservice1
 			
 		}
 		

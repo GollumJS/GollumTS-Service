@@ -14,6 +14,7 @@ interface ContainerValue {
 export abstract class App {
 	
 	public static DEFAULT_CONTAINER_NAME = 'default';
+	public static SERVICE_NAME_PROPERTY = '__gts_sarvicename__';
 	
 	private static _instances: ObjectString<App> = {};
 	
@@ -84,6 +85,7 @@ export abstract class App {
 		if (!target.instance) {
 			const args: any[] = target.options && target.options.args ? target.options.args : [];
 			target.instance = new (target.clazz)(...args);
+			target[App.SERVICE_NAME_PROPERTY] = name;
 		}
 		return target.instance;
 	}
