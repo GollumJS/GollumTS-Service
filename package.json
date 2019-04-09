@@ -1,6 +1,6 @@
 {
   "name": "gollumts-service",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "An implementaion of service injector and manager.",
   "main": "index.js",
   "scripts": {
@@ -44,6 +44,9 @@
     "src/Decorator/Tagged.ts",
     "src/Decorator/Tagged.js",
     "src/Decorator/Tagged.js.map",
+    "src/Decorator/ServiceName.ts",
+    "src/Decorator/ServiceName.js",
+    "src/Decorator/ServiceName.js.map",
     "LICENSE",
     "README.md",
     "package.json",
